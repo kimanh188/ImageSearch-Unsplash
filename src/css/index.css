@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Sofia&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color: #fff6e0;
+  --text-color: #222831;
+}
+
+body {
+  font-family: "Sofia", cursive;
+  height: 100vh;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.heading {
+  text-align: center;
+  position: relative;
+  height: 400px;
+}
+
+.heading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(..//imgs-icons/Emerald-Bay-State-Park.avif);
+  background-color: rgba(0, 0, 0, 0.5);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+  z-index: -1;
+}
+
+.heading h1 {
+  font-size: 3.052rem;
+  padding-top: 6rem;
+}
+
+.search-container {
+  padding: 3rem 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.search-container #search-input {
+  border: none;
+  border-radius: 10px;
+  padding: 0.5em;
+  font-size: 1.25rem;
+  outline: none;
+  width: 18.75rem;
+  height: 2.1875rem;
+  transition: all ease 0.5s;
+}
+
+.search-container #search-input:focus {
+  border: 3px solid #3d978dde;
+}
+
+.search-container #search-btn {
+  border: none;
+  background: transparent;
+  padding: 0 0.5em;
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+.search-container #search-btn img {
+  height: 30px;
+  transition: all 0.5s ease-in;
+}
+
+.search-container #search-btn img:hover {
+  scale: 1.35;
+  transform: rotateY(180deg);
+}
+
+.grid-gallery {
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 30px 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: 250px;
+  grid-auto-flow: dense;
+  grid-gap: 25px;
+}
+
+.grid-gallery .grid-item {
+  position: relative;
+  background-color: #efefef;
+  overflow: hidden;
+}
+
+.grid-gallery .grid-item a {
+  cursor: zoom-in;
+}
+
+.grid-gallery .grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.grid-gallery .grid-item:hover img {
+  transform: scale(1.1);
+}
+
+.grid-gallery .grid-item:nth-child(3n-2) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
