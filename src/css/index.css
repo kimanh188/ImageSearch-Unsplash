@@ -84,6 +84,13 @@ body {
   transform: rotateY(180deg);
 }
 
+#error-message {
+  text-align: center;
+
+  padding: 1rem;
+  color: red;
+}
+
 .grid-gallery {
   width: 100%;
   max-width: 1350px;

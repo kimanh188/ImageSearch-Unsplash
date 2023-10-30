@@ -3,10 +3,11 @@ import { unsplashAccessKey, getApi } from "./api.js";
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 const imgResult = document.querySelector(".grid-gallery");
+const errorMessage = document.getElementById("error-message");
 
 let numberOfDisplayedImg = 18;
 
-//Function to create images(and its container) inside section gallery
+//create images(and its container) inside section gallery
 function addImgs(imgs) {
   imgResult.innerHTML = ""; //clear the previous imgs so that new img set can replace
 
@@ -30,7 +31,7 @@ function addImgs(imgs) {
 }
 
 //GET IMAGES BY SEARCH KEYWORD:
-//Function loads imgs from api call based on searched keyword that user typed (when user doesn't type anything then display random imgs). This function is called when search button is clicked or user hit Enter.
+//loads imgs from api call based on searched keyword that user typed (when user doesn't type anything then display random imgs). This function is called when search button is clicked or user hit Enter.
 function getRandomPageNumber() {
   return Math.floor(Math.random() * 100) + 1; //random number from 0 to 100
 }
@@ -50,7 +51,11 @@ async function getFoundImgsByKeyword() {
     } else {
       getRandomImgs();
     }
+    //clear previous error message
+    errorMessage.textContent = "";
   } catch (error) {
+    errorMessage.textContent =
+      "Sorry, there was an error. Unable to fetch data.";
     console.log("Unable to fetch data", error);
   }
 }
