@@ -7,7 +7,6 @@ const errorMessage = document.getElementById("error-message");
 
 let numberOfDisplayedImg = 18;
 
-//create images(and its container) inside section gallery
 function addImgs(imgs) {
   imgResult.innerHTML = ""; //clear the previous imgs so that new img set can replace
 
@@ -30,23 +29,23 @@ function addImgs(imgs) {
   });
 }
 
-//GET IMAGES BY SEARCH KEYWORD:
-//loads imgs from api call based on searched keyword that user typed (when user doesn't type anything then display random imgs). This function is called when search button is clicked or user hit Enter.
 function getRandomPageNumber() {
   return Math.floor(Math.random() * 100) + 1; //random number from 0 to 100
 }
 
+//GET IMAGES BY SEARCH KEYWORD:
 async function getFoundImgsByKeyword() {
   try {
     const searchKeyword = searchInput.value;
+    console.log(searchKeyword);
 
     if (searchKeyword != "") {
       const page = getRandomPageNumber();
-      //console.log(searchKeyword);
+
       const apiUrlbyKeyword = `https://api.unsplash.com/search/photos?query=${searchKeyword}&per_page=${numberOfDisplayedImg}&client_id=${unsplashAccessKey}&page=${page}`;
 
       const foundImgs = await getApi(apiUrlbyKeyword);
-      //console.log(foundImgs);
+      console.log(foundImgs);
       addImgs(foundImgs.results);
     } else {
       getRandomImgs();
