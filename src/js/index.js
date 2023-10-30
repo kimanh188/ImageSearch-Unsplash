@@ -30,14 +30,14 @@ function addImgs(imgs) {
 }
 
 function getRandomPageNumber() {
-  return Math.floor(Math.random() * 100) + 1; //random number from 0 to 100
+  return Math.floor(Math.random() * 10) + 1; //random number from 0 to 10
 }
 
 //GET IMAGES BY SEARCH KEYWORD:
 async function getFoundImgsByKeyword() {
   try {
     const searchKeyword = searchInput.value;
-    console.log(searchKeyword);
+    //console.log(searchKeyword);
 
     if (searchKeyword != "") {
       const page = getRandomPageNumber();
@@ -45,7 +45,7 @@ async function getFoundImgsByKeyword() {
       const apiUrlbyKeyword = `https://api.unsplash.com/search/photos?query=${searchKeyword}&per_page=${numberOfDisplayedImg}&client_id=${unsplashAccessKey}&page=${page}`;
 
       const foundImgs = await getApi(apiUrlbyKeyword);
-      console.log(foundImgs);
+      //console.log(foundImgs);
       addImgs(foundImgs.results);
     } else {
       getRandomImgs();
@@ -81,15 +81,3 @@ async function getRandomImgs() {
 window.addEventListener("load", getRandomImgs);
 
 //api link get imgs by keyword: https://api.unsplash.com/search/photos?query=${searchKeyword}&client_id=${unsplashAccessKey}
-
-/* //HOVER FOR BUTTON:
-//Add hover effect for button by adding class from fontawesome
-function btnHoverAnimation(event) {
-  if (event.type === "mouseenter") {
-    //searchBtn.classList.add("fa-bounce");
-  } else if (event.type === "mouseleave") {
-    //searchBtn.classList.remove("fa-bounce");
-  }
-}
-searchBtn.addEventListener("mouseenter", btnHoverAnimation);
-searchBtn.addEventListener("mouseleave", btnHoverAnimation); */
