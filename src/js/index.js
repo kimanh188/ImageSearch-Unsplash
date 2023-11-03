@@ -1,6 +1,4 @@
-import { unsplashAccessKey, getApi } from "../../server/api.js";
-
-console.log(unsplashAccessKey);
+import { unsplashAccessKey, getApi } from "./api.js";
 
 const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
