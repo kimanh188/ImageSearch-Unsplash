@@ -4,12 +4,14 @@ const searchInput = document.getElementById("search-input");
 const searchBtn = document.getElementById("search-btn");
 const imgResult = document.querySelector(".grid-gallery");
 const errorMessage = document.getElementById("error-message");
+const loadMoreBtn = document.getElementById("load-more-btn");
 
 let numberOfDisplayedImg = 18;
+let totalPageOfResult = 1;
+let page = 1;
+let prevSearchKeyword = "";
 
 function addImgs(imgs) {
-  imgResult.innerHTML = ""; //clear the previous imgs so that new img set can replace
-
   imgs.forEach((img) => {
     const imageContainer = document.createElement("div");
     const imageLink = document.createElement("a");
@@ -29,10 +31,6 @@ function addImgs(imgs) {
   });
 }
 
-function getRandomPageNumber() {
-  return Math.floor(Math.random() * 10) + 1; //random number from 0 to 10
-}
-
 //GET IMAGES BY SEARCH KEYWORD:
 async function getFoundImgsByKeyword() {
   try {
@@ -40,24 +38,36 @@ async function getFoundImgsByKeyword() {
     //console.log(searchKeyword);
 
     if (searchKeyword != "") {
-      const page = getRandomPageNumber();
+      if (searchKeyword !== prevSearchKeyword) {
+        page = 1;
+        imgResult.innerHTML = ""; //clear the previous imgs so that new img set can replace
+      }
 
       const apiUrlbyKeyword = `https://api.unsplash.com/search/photos?query=${searchKeyword}&per_page=${numberOfDisplayedImg}&client_id=${unsplashAccessKey}&page=${page}`;
 
       const foundImgs = await getApi(apiUrlbyKeyword);
-      //console.log(foundImgs);
+      console.log(foundImgs);
       addImgs(foundImgs.results);
+      totalPageOfResult = foundImgs.total_pages;
+      prevSearchKeyword = searchKeyword;
     } else {
       getRandomImgs();
     }
-    //clear previous error message
-    errorMessage.textContent = "";
+
+    errorMessage.textContent = ""; //clear previous error message
   } catch (error) {
     errorMessage.textContent =
       "Sorry, there was an error. Unable to fetch data.";
     console.log("Unable to fetch data", error);
+  } finally {
+    if (page === totalPageOfResult || totalPageOfResult === 1) {
+      loadMoreBtn.disabled = true;
+    } else {
+      loadMoreBtn.disabled = false;
+    }
   }
 }
+
 searchBtn.addEventListener("click", getFoundImgsByKeyword);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
@@ -66,8 +76,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-//RANDOM IMG GALLERY BY PAGE LOAD:
-//When page loaded, random images appears by getting data from api call and call function addImgs
 async function getRandomImgs() {
   try {
     const apiUrlRandomImg = `https://api.unsplash.com/photos/random?count=${numberOfDisplayedImg}&client_id=${unsplashAccessKey}`;
@@ -79,6 +87,12 @@ async function getRandomImgs() {
     console.log("Unable to fetch data", error);
   }
 }
-window.addEventListener("load", getRandomImgs);
 
-//api link get imgs by keyword: https://api.unsplash.com/search/photos?query=${searchKeyword}&client_id=${unsplashAccessKey}
+//load more images
+loadMoreBtn.addEventListener("click", () => {
+  page++;
+  getFoundImgsByKeyword();
+});
+
+//initial load
+window.addEventListener("load", getRandomImgs);

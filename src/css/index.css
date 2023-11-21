@@ -9,11 +9,13 @@
 :root {
   --bg-color: #fff6e0;
   --text-color: #222831;
+  --accent-color: #3d978dde;
 }
 
 body {
   font-family: "Sofia", cursive;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   color: var(--text-color);
   background-color: var(--bg-color);
 }
@@ -63,7 +65,7 @@ body {
 }
 
 .search-container #search-input:focus {
-  border: 3px solid #3d978dde;
+  border: 3px solid var(--accent-color);
 }
 
 .search-container #search-btn {
@@ -105,7 +107,6 @@ body {
 
 .grid-gallery .grid-item {
   position: relative;
-  background-color: #efefef;
   overflow: hidden;
 }
 
@@ -127,4 +128,24 @@ body {
 .grid-gallery .grid-item:nth-child(3n-2) {
   grid-column: span 2;
   grid-row: span 2;
+}
+
+#load-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--accent-color);
+  color: #fff;
+  font-size: 1.25rem;
+  font-family: "Sofia", cursive;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+#load-more-btn:hover {
+  background-color: #fff;
+  border: 2px solid var(--accent-color);
+  color: var(--text-color);
 }
