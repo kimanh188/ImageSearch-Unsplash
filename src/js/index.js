@@ -72,6 +72,9 @@ searchBtn.addEventListener("click", getFoundImgsByKeyword);
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
+    if (searchInput.value !== "" && searchInput.value === prevSearchKeyword) {
+      page++;
+    }
     getFoundImgsByKeyword();
   }
 });

@@ -8,6 +8,6 @@ A simple yet efficient image search engine utilizing the Unsplash API. This proj
 
 - **Search Functionality:** Easily search for images using the Unsplash API.
 - **Dynamic Layout:** Utilizes CSS Grid to create a layout for displaying 18 images with each search.
-- **Interactive Results:** Hit Enter again to load another set of search results.
+- **Load More Button:** Click the "Load More" button or hit Enter again to load another set of search results.
 - **Hover Descriptions:** Hover over an image to see a description.
 - **Full-size View:** Click on an image to open the full original size in a new tab.
