@@ -5,6 +5,7 @@ const searchBtn = document.getElementById("search-btn");
 const imgResult = document.querySelector(".grid-gallery");
 const errorMessage = document.getElementById("error-message");
 const loadMoreBtn = document.getElementById("load-more-btn");
+const backToTopBtn = document.getElementById("back-to-top-btn");
 
 let numberOfDisplayedImg = 18;
 let totalPageOfResult = 1;
@@ -95,6 +96,11 @@ async function getRandomImgs() {
 loadMoreBtn.addEventListener("click", () => {
   page++;
   getFoundImgsByKeyword();
+});
+
+//back to top button
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo(0, 0);
 });
 
 //initial load
